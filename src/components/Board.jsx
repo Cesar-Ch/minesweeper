@@ -109,7 +109,6 @@ export function Board({ selectedValue }) {
         setWinner(newWin)
         setLoser(newLose)
     }
-    console.log(board)
     return (
         <div className='flex flex-wrap justify-center items-center  border-green-500 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-center ' >
             {

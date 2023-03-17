@@ -1,4 +1,7 @@
+import confetti from "canvas-confetti"
+
 export function WinnerModal() {
+    confetti()
     return (
         <div className=" absolute  z-20  top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center " style={{ backgroundColor: 'rgba(0,0,0,.5)' }}>
             <article

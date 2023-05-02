@@ -5,6 +5,7 @@ import { DiscoverCells } from "../logics/discoverCells"
 import { level, numbers } from "../logics/constants";
 import { WinnerModal } from "./WinnerModal";
 import { LoserModal } from "./LoserModal";
+import Selection from "./Selection";
 
 export function Board({ selectedValue }) {
 
@@ -13,6 +14,16 @@ export function Board({ selectedValue }) {
     const [winner, setWinner] = useState(false)
     const [loser, setLoser] = useState(false)
     const [isFirstSelectionZero, setIsFirstSelectionZero] = useState(false)
+    const [clientX, setClientX] = useState(0)
+    const [clientY, setClientY] = useState(0)
+    const [selectedItem, setSelectedItem] = useState(false)
+    const [viewItem, setViewItem] = useState(false)
+    const [markMine, setMarkMine] = useState(false)
+    const [indice, setIndice] = useState(0)
+    const [indiceFila, setIndiceFila] = useState(0)
+    console.log(board)
+    console.log(isSelected)
+    console.log(markMine)
     useEffect(() => {
         if (selectedValue === 'Easy') {
             initializeBoard(12, 6, 10);
@@ -52,8 +63,8 @@ export function Board({ selectedValue }) {
     }
 
     const styles = {
-        evenShow: ' font-extrabold cursor-pointer flex justify-center items-center ',
-        evenHidden: `flex justify-center font-extrabold cursor-pointer w-[calc(100%/${level[selectedValue].col})] h-[calc(100%/${level[selectedValue].row})] `
+        evenShow: ' font-extrabold  flex justify-center items-center ',
+        evenHidden: `flex justify-center font-extrabold items-center  cursor-pointer w-[calc(100%/${level[selectedValue].col})] h-[calc(100%/${level[selectedValue].row})] `
     }
 
     function checkWin(isSelected) {
@@ -62,7 +73,7 @@ export function Board({ selectedValue }) {
         let lose = false
         isSelected.map((row) =>
             row.map((cell) => {
-                if (cell !== '💣' && cell !== null) {
+                if (cell !== '💣' && cell !== null&& cell !== '🚩') {
                     i++
                 }
                 if (cell === "💣") {
@@ -77,7 +88,7 @@ export function Board({ selectedValue }) {
         return [win, lose]
     }
 
-    function updateBoard(index, i) {
+    function updateBoard(index, i, clX, clY) {
 
         if (!isFirstSelectionZero) {
             if (board[index][i] !== 0) {
@@ -93,38 +104,90 @@ export function Board({ selectedValue }) {
                 setIsFirstSelectionZero(true)
                 return
             } else {
+                DiscoverCells([index, i], board, isSelected)
                 setIsFirstSelectionZero(true)
             }
         }
 
-        const newIsSelected = [...isSelected]
-        if (board[index][i] === 0) {
-            DiscoverCells([index, i], board, newIsSelected)
+        setIndice(index)
+        setIndiceFila(i)
 
-        } else {
-            newIsSelected[index][i] = board[index][i]
+        if (isFirstSelectionZero) {
+            setSelectedItem(true)
+            setClientY(clY - 65)
+            setClientX(clX - 80)
         }
-        setIsSelected(newIsSelected)
+
+
+    }
+
+    useEffect(() => {
+        const newIsSelected = [...isSelected]
+        if (viewItem === true) {
+            if (board[indice][indiceFila] === 0) {
+                DiscoverCells([indice, indiceFila], board, isSelected)
+
+            } else {
+                isSelected[indice][indiceFila] = board[indice][indiceFila]
+            }
+            setViewItem(false)
+            setIsSelected(newIsSelected)
+        }
+
+        if (markMine === true) {
+            if(isSelected[indice][indiceFila] === '🚩'){
+                console.log('here')
+                const newIsSelectedMine = [...isSelected]
+                newIsSelectedMine[indice][indiceFila] = null
+                setIsSelected(newIsSelectedMine)
+            }else{
+                const newIsSelectedMine = [...isSelected]
+                newIsSelectedMine[indice][indiceFila] = '🚩'
+                setIsSelected(newIsSelectedMine)
+            }
+
+            setMarkMine(false)
+        }
         const [newWin, newLose] = checkWin(newIsSelected)
         setWinner(newWin)
         setLoser(newLose)
-    }
+        setSelectedItem(false)
+    }, [viewItem, markMine])
+
+
     return (
         <div className='flex flex-wrap justify-center items-center  border-green-500 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-center ' >
             {
+                selectedItem && (
+                    <div className="absolute flex items-center p-[10px]" style={{ top: clientY + 'px', left: clientX + 'px' }}>
+                        <Selection setViewItem={setViewItem} setMarkMine={setMarkMine} setSelectedItem={setSelectedItem} />
+                    </div>
+
+                )
+            }
+
+            {
                 isSelected.map((elem, index) => (
-                    elem.map((e, i) => {
-                        return (e >= 0 || e === '💣') && e !== null
+
+                    elem.map((j, i) => {
+                        return (j >= 0 || j === '💣') && j !== null
                             ? (
+
                                 <div key={i} className={(i + index) % 2 === 0 ? `bg-[#E5C29F] ${styles.evenShow}` : `bg-[#D7B899] ${styles.evenShow}`}
                                     onClick={() => updateBoard(index, i)} style={{ width: `calc(100%/${level[selectedValue].col})`, height: `calc(100%/${level[selectedValue].row})` }}>
-                                    <p className={numbers[e] ? numbers[e] : 'text-black'}>{e}</p>
+
+                                    <p className={numbers[j] ? numbers[j] : 'text-black'}>{j}</p>
                                 </div>
                             )
+
                             :
                             (
                                 <div key={i} className={(i + index) % 2 === 0 ? `bg-green-400  ${styles.evenHidden}` : `bg-green-500   ${styles.evenHidden}`}
-                                    onClick={() => updateBoard(index, i)} style={{ width: `calc(100%/${level[selectedValue].col})`, height: `calc(100%/${level[selectedValue].row})` }}>
+                                    onClick={(e) => updateBoard(index, i, e.clientX, e.clientY)} style={{ width: `calc(100%/${level[selectedValue].col})`, height: `calc(100%/${level[selectedValue].row})` }}>
+
+                                    {
+                                        j === '🚩' ? <p>🚩</p> : <p></p>
+                                    }
 
                                 </div>
                             )
@@ -135,9 +198,9 @@ export function Board({ selectedValue }) {
             }
             <div>
                 {
-                    winner ? ( <div>
+                    winner ? (<div>
                         <WinnerModal />
-                    </div> ) : ''
+                    </div>) : ''
                 }
                 {
                     loser ? <LoserModal /> : ''

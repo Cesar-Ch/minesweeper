@@ -1,3 +1,5 @@
+import { resetGameStorage } from "../logics/storage";
+
 export function LoserModal() {
     return (
         <div className=" absolute  z-20  top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center " style={{ backgroundColor: 'rgba(0,0,0,.5)' }}>
@@ -18,7 +20,7 @@ export function LoserModal() {
 
                 <button
                     class="inline-block rounded-md bg-white px-4 py-2 text-sm text-blue-400 shadow-sm focus:relative dark:bg-gray-800 hover:bg-gray-700"
-                    onClick={() => location.reload()}
+                    onClick={() => resetGameStorage()}
                 >
                     Reset Game
                 </button>

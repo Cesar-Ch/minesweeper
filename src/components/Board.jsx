@@ -24,7 +24,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
   const [loser, setLoser] = useState(false)
   const [isFirstSelectionZero, setIsFirstSelectionZero] = useState(() => {
     const isFirstSelectionZeroFromStorage = window.localStorage.getItem('isFirstSelectionZero')
-    if (isFirstSelectionZeroFromStorage) return isFirstSelectionZeroFromStorage
+    if (isFirstSelectionZeroFromStorage=== 'true') return true
     return false
   })
   const [clientX, setClientX] = useState(0)
@@ -41,6 +41,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
   }
   )
 
+  // Seleccionar el nivel
   useEffect(() => {
 
     if (newSelectedValue === 'NotLevel') {
@@ -80,13 +81,13 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
     }
   }, [selectedValue])
 
+  // Funcion que verfica si la primera seleccion es cero
   function firstSelectionZero(rows, cols, mines, index, i) {
     let newBoard = CheckNumber(randomBoard(rows, cols, mines))
     while (newBoard[index][i] !== 0) {
       newBoard = CheckNumber(randomBoard(rows, cols, mines))
     }
     setBoard(newBoard)
-
     const newIsSelected = [...isDiscovered]
     if (newBoard[index][i] === 0) {
       DiscoverCells([index, i], newBoard, newIsSelected)
@@ -134,6 +135,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
     saveGameToStorage(board, isDiscovered, isFirstSelectionZero, markedFlags, selectedValue)
   }, [board, isDiscovered, isFirstSelectionZero, markedFlags, selectedValue])
 
+
   useEffect(() => {
     const newIsSelected = [...isDiscovered]
     if (viewItem === true) {
@@ -158,7 +160,6 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
         setMarkedFlags(markedFlags + 1)
         setIsDiscovered(newIsSelectedMine)
       }
-
       setMarkMine(false)
     }
     const [newWin, newLose] = checkWin(newIsSelected, selectedValue)

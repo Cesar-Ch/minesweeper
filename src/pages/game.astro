@@ -1,0 +1,12 @@
+---
+import { GameM } from "../components/GameM";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    style="bg-slate-700 flex flex-wrap justify-center items-center h-[100vh]"
+>
+    <div class="w-[100%] h-[650px] flex justify-center items-center text-white">
+        <GameM client:only />
+    </div>
+</Layout>

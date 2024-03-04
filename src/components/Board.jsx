@@ -171,7 +171,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
   }, [viewItem, markMine])
 
   return (
-    <div className='flex flex-wrap justify-center items-center  border-black/30 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-cente' >
+    <div className='flex flex-wrap justify-center items-center  border-gray-600 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-cente' >
       {
         selectedItem && (
           <div className="absolute flex items-center p-[10px]" style={{ top: clientY + 'px', left: clientX + 'px' }}>

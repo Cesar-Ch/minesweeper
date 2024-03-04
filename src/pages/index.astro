@@ -1,23 +1,37 @@
 ---
-// import { Game } from "../components/Game";
-import { Game } from "../components/Game";
+import Layout from "../layouts/Layout.astro";
+const styleInput = `w-full p-2.5 text-sm rounded-lg bg-[#2b2b2b] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 `;
+const styleLabel = `block mb-2 text-sm font-medium  text-white`;
+
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="logo.jpg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Minesweeper</title>
-	</head>
-	<body
-		class="bg-slate-700 flex flex-wrap justify-center items-center h-[100vh]"
-	>
-		<div
-			class="w-[100%] h-[650px] flex justify-center items-center text-white"
-		>
-			<Game client:only />
+<Layout
+	style="bg-[#1d1d1d] flex flex-col flex-wrap justify-center items-center h-[100vh]"
+>
+	<h1 class="text-white text-3xl font-bold m-10">Log In</h1>
+	<form class="w-[300px] mx-auto rounded-lg">
+		<div class="mb-5">
+			<label for="email" class={styleLabel}>Your email</label>
+			<input
+				type="email"
+				id="email"
+				class={styleInput}
+				placeholder=""
+				required
+			/>
 		</div>
-	</body>
-</html>
+		<div class="mb-5">
+			<label for="password" class={styleLabel}>Your password</label>
+			<input type="password" id="password" class={styleInput} required />
+		</div>
+
+		<button
+			type="submit"
+			class="text-black focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-zinc-100 hover:bg-zinc-200 focus:ring-zinc-300"
+			>Login</button
+		>
+		<div class="mt-5">
+            <h3 class="text-white">Don't have an account  <a href="minesweeper/register" class="text-blue-600">Signup now</a></h3>
+        </div>
+	</form>
+</Layout>

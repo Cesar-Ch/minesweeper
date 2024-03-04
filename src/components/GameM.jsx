@@ -4,7 +4,7 @@ import { level } from '../logics/constants'
 import { BombIcon } from './icons/BombIcon'
 import { FlagIcon } from './icons/FlagIcon'
 
-export function Game() {
+export function GameM() {
   const [selectedValue, setSelectedValue] = useState(() => {
     const selectedValueFromStorage = window.localStorage.getItem('selectedValue')
     if (selectedValueFromStorage) return selectedValueFromStorage

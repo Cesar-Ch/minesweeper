@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+const styleInput = `w-full p-2.5 text-sm rounded-lg bg-[#2b2b2b] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 `;
+const styleLabel = `block mb-2 text-sm font-medium  text-white`;
+---
+
+<Layout
+    style="bg-[#1d1d1d] flex flex-col flex-wrap justify-center items-center h-[100vh]"
+>
+    <h1 class="text-white text-3xl font-bold m-10">Log In</h1>
+    <form class="w-[600px] mx-auto justify-between rounded-lg flex flex-wrap gap-2">
+        <div class="mb-5 w-[45%]">
+            <label for="name" class={styleLabel}>Your First name</label>
+            <input
+                type="text"
+                id="name"
+                class={styleInput}
+                placeholder=""
+                required
+            />
+        </div>
+        <div class="mb-5 w-[45%]">
+            <label for="lastname" class={styleLabel}>Your Last name</label>
+            <input
+                type="text"
+                id="lastname"
+                class={styleInput}
+                placeholder=""
+                required
+            />
+        </div>
+        <div class="mb-5 w-full">
+            <label for="username" class={styleLabel}>Your username</label>
+            <input
+                type="text"
+                id="username"
+                class={styleInput}
+                placeholder=""
+                required
+            />
+        </div>
+        <div class="mb-5 w-full">
+            <label for="email" class={styleLabel}>Your email</label>
+            <input
+                type="email"
+                id="email"
+                class={styleInput}
+                placeholder=""
+                required
+            />
+        </div>
+        <div class="mb-5 w-full">
+            <label for="password" class={styleLabel}>Your password</label>
+            <input type="password" id="password" class={styleInput} required />
+        </div>
+
+        <button
+            type="submit"
+            class="text-black focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-zinc-100 hover:bg-zinc-200 focus:ring-zinc-300"
+            >Register</button
+        >
+       
+    </form>
+</Layout>

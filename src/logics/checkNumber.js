@@ -3,8 +3,8 @@ export function CheckNumber (matrix) {
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
       let value = 0
-      if (matrix[i][j] === '💣') {
-        arr[i].push('💣')
+      if (matrix[i][j] === 'bomb') {
+        arr[i].push('bomb')
       } else {
         if (i > 0) {
           if (matrix[i - 1][j - 1]) {

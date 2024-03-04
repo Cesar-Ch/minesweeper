@@ -8,6 +8,8 @@ import { LoserModal } from './LoserModal'
 import Selection from './Selection'
 import { checkWin, initializeBoard } from '../logics/board'
 import { saveGameToStorage } from '../logics/storage'
+import { BombIcon } from './icons/BombIcon'
+import { FlagIcon } from './icons/FlagIcon'
 
 export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
   const [board, setBoard] = useState(() => {
@@ -24,7 +26,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
   const [loser, setLoser] = useState(false)
   const [isFirstSelectionZero, setIsFirstSelectionZero] = useState(() => {
     const isFirstSelectionZeroFromStorage = window.localStorage.getItem('isFirstSelectionZero')
-    if (isFirstSelectionZeroFromStorage=== 'true') return true
+    if (isFirstSelectionZeroFromStorage === 'true') return true
     return false
   })
   const [clientX, setClientX] = useState(0)
@@ -169,7 +171,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
   }, [viewItem, markMine])
 
   return (
-    <div className='flex flex-wrap justify-center items-center  border-green-500 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-center ' >
+    <div className='flex flex-wrap justify-center items-center  border-black/30 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-cente' >
       {
         selectedItem && (
           <div className="absolute flex items-center p-[10px]" style={{ top: clientY + 'px', left: clientX + 'px' }}>
@@ -183,22 +185,24 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
         isDiscovered.map((elem, index) => (
 
           elem.map((j, i) => {
-            return (j >= 0 || j === '💣') && j !== null
+            return (j >= 0 || j === 'bomb') && j !== null
               ? (
 
-                <div key={i} className={(i + index) % 2 === 0 ? `bg-[#E5C29F] ${STYLES.evenShow}` : `bg-[#D7B899] ${STYLES.evenShow}`}
+                <div key={i} className={(i + index) % 2 === 0 ? `bg-black/10 ${STYLES.evenShow}` : `bg-black/20 ${STYLES.evenShow}`}
                   onClick={() => updateBoard(index, i)} style={{ width: `calc(100%/${level[selectedValue].col})`, height: `calc(100%/${level[selectedValue].row})` }}>
 
-                  <p className={numbers[j] ? numbers[j] : 'text-black'}>{j}</p>
+                  <p className={numbers[j] ? numbers[j] : 'text-white'}>{
+                    j === "bomb" ? (<BombIcon />) : (j)
+                  }</p>
                 </div>
               )
 
               : (
-                <div key={i} className={(i + index) % 2 === 0 ? `bg-green-400  ${STYLES.evenHidden}` : `bg-green-500   ${STYLES.evenHidden}`}
+                <div key={i} className={(i + index) % 2 === 0 ? `bg-emerald-400  ${STYLES.evenHidden}` : `bg-emerald-500   ${STYLES.evenHidden}`}
                   onClick={(e) => updateBoard(index, i, e.clientX, e.clientY)} style={{ width: `calc(100%/${level[selectedValue].col})`, height: `calc(100%/${level[selectedValue].row})` }}>
 
                   {
-                    j === '🚩' ? <p>🚩</p> : <p></p>
+                    j === '🚩' ? <p className=' bg-black/60 rounded-lg h-[90%] w-[90%] flex justify-center items-center' ><FlagIcon style={`text-slate-100 fill-slate-100`} /></p> : <p></p>
                   }
 
                 </div>

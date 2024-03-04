@@ -3,7 +3,7 @@ export function randomBoard(rows, cols, mines) {
     
     if(mines !== 0){
         for (let i = 0; i < mines; i++) {
-            arr[i] = "💣"
+            arr[i] = "bomb"
         }
     }
 

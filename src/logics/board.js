@@ -8,10 +8,10 @@ export function checkWin (isDiscovered, selectedValue) {
   let lose = false
   isDiscovered.map((row) =>
     row.map((cell) => {
-      if (cell !== '💣' && cell !== null && cell !== '🚩') {
+      if (cell !== 'bomb' && cell !== null && cell !== '🚩') {
         i++
       }
-      if (cell === '💣') {
+      if (cell === 'bomb') {
         lose = true
       }
     }))

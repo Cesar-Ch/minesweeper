@@ -1,6 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import LoginPage from "../components/LoginPage"
+import LoginPage from "../components/LoginPage";
+const cookie = Astro.request.headers.get("cookie");
+
+if (cookie !== null) {
+	return Astro.redirect("/minesweeper/game");
+}
+
 ---
 
 <Layout
@@ -8,4 +14,3 @@ import LoginPage from "../components/LoginPage"
 >
 	<LoginPage client:only />
 </Layout>
-../components/LoginPage

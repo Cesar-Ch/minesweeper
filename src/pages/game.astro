@@ -1,6 +1,12 @@
 ---
 import { GameM } from "../components/GameM";
 import Layout from "../layouts/Layout.astro";
+const cookie = Astro.request.headers.get('cookie')
+
+if(cookie === null){
+    return Astro.redirect('/minesweeper')
+} 
+
 ---
 
 <Layout

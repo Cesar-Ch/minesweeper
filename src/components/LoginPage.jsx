@@ -25,12 +25,16 @@ const LoginPage = () => {
                 },
                 body: JSON.stringify({ credentials })
             })
+            if (response.status === 200) {
+                window.location.reload()
+                console.log('Login successful')
+            }
 
             console.log(response)
         }
         catch (error) {
             console.log(error)
-         }
+        }
     }
 
     return (

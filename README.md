@@ -1,1 +1,1 @@
-![Imagen de la pagina web](./public//web.jpg)
+![Imagen de la pagina web](./public/website.png)

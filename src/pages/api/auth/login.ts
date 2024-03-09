@@ -1,23 +1,26 @@
 import { type APIRoute } from "astro";
 import jwt from 'jsonwebtoken'
 import { serialize } from 'cookie'
+import { getUser } from "../../../db/client";
 
 
 export const POST: APIRoute = async ({ request }) => {
 
     const { credentials } = await request.json();
+    const user = await getUser(credentials.email)
+    console.log(user.rows[0]);
     console.log(credentials);
 
-    if (credentials.email === 'admin@local.com' && credentials.password === 'admin') {
+    if (credentials.email === user.rows[0].email && credentials.password === user.rows[0].password) {
         const token = jwt.sign({
-            id: 1,
-            email: 'admin@local.com',
-            username: 'Player1',
+            user_id: user.rows[0].user_id,
+            email: user.rows[0].email,
+            username: user.rows[0].username,
             exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30)
-        }, 'secret')
+        },import.meta.env.JWT_SECRET)
         const serialized = serialize('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure:import.meta.env.NODE_ENV === 'production',
             sameSite: 'strict',
             maxAge: 60 * 60 * 24 * 30,
             path: '/',

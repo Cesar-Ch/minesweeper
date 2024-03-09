@@ -13,15 +13,16 @@ export const GET: APIRoute = ({ params, request }) => {
     }
 
     try {
-        const user = verify(token, 'secret') as { email: string, username: 'string' }
+        const user = verify(token, 'secret') as { user_id: number, email: string, username: string }
         return new Response(JSON.stringify({
+            user_id: user.user_id,
             email: user.email,
             username: user.username,
         }), {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                
+
             }
         }
         )

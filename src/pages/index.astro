@@ -7,10 +7,19 @@ if (cookie !== null) {
 	return Astro.redirect("/minesweeper/game");
 }
 
+const {path} = Astro.params
+console.log(path)
 ---
 
 <Layout
 	style="bg-[#1d1d1d] flex flex-col flex-wrap justify-center items-center h-[100vh]"
 >
 	<LoginPage client:only />
+	<div class="mt-5">
+		<h3 class="text-white">
+			Don't have an account <a
+				href="minesweeper/register"
+				class="text-blue-600">Signup now</a>
+		</h3>
+	</div>
 </Layout>

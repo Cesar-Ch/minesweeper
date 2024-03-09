@@ -63,9 +63,7 @@ const LoginPage = () => {
                     className="text-black focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-zinc-100 hover:bg-zinc-200 focus:ring-zinc-300"
                 >Login</button
                 >
-                <div className="mt-5">
-                    <h3 className="text-white">Don't have an account  <a href="minesweeper/register" className="text-blue-600">Signup now</a></h3>
-                </div>
+                
             </form>
         </>
     )

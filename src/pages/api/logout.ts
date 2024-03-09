@@ -19,7 +19,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     try {
-        verify(token, 'secret')
+        verify(token, import.meta.env.JWT_SECRET)
         const serialized = cookie.serialize('token', null, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

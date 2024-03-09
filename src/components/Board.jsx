@@ -11,7 +11,7 @@ import { saveGameToStorage } from '../logics/storage'
 import { BombIcon } from './icons/BombIcon'
 import { FlagIcon } from './icons/FlagIcon'
 
-export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
+export function Board({ selectedValue, setMarkedFlags, markedFlags, user, time }) {
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem('board')
     if (boardFromStorage) return JSON.parse(boardFromStorage)
@@ -79,8 +79,10 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
         setMarkedFlags(0)
         setNewSelectedValue('Hard')
       }
+
       setIsFirstSelectionZero(false)
     }
+
   }, [selectedValue])
 
   // Funcion que verfica si la primera seleccion es cero
@@ -188,7 +190,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
             return (j >= 0 || j === 'bomb') && j !== null
               ? (
 
-                <div key={i} className={(i + index) % 2 === 0 ? `bg-black/10 ${STYLES.evenShow}` : `bg-black/20 ${STYLES.evenShow}`}
+                <div key={i} className={(i + index) % 2 === 0 ? `bg-black/10 ${STYLES.evenShow} pointer-events-none` : `bg-black/20 ${STYLES.evenShow} pointer-events-none`}
                   onClick={() => updateBoard(index, i)} style={{ width: `calc(100%/${level[selectedValue].col})`, height: `calc(100%/${level[selectedValue].row})` }}>
 
                   <p className={numbers[j] ? numbers[j] : 'text-white'}>{
@@ -216,7 +218,7 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags }) {
         {
           winner
             ? (<div>
-              <WinnerModal />
+              <WinnerModal user={user} time={time} selectedValue={selectedValue} />
             </div>)
             : ''
         }

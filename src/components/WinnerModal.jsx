@@ -1,7 +1,27 @@
 import confetti from 'canvas-confetti'
 import { resetGameStorage } from '../logics/storage'
 
-export function WinnerModal() {
+export function WinnerModal({user,time,selectedValue}) {
+
+    const gameWin = async () => {
+
+        try {
+            const response = await fetch('/minesweeper/api/winner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({user,time,selectedValue})
+            })
+            
+        }
+        catch (error) {
+            console.log(error)
+        }
+
+        resetGameStorage()
+    }
+
     confetti()
     return (
         <div className=" absolute  z-20  top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center " style={{ backgroundColor: 'rgba(0,0,0,.5)' }}>
@@ -22,7 +42,7 @@ export function WinnerModal() {
                 </h3>
 
                 <button
-                    class="inline-block rounded-md bg-white px-4 py-2 text-sm text-blue-400 shadow-sm focus:relative dark:bg-gray-800 hover:bg-gray-700" onClick={() => resetGameStorage()}
+                    class="inline-block rounded-md bg-white px-4 py-2 text-sm text-blue-400 shadow-sm focus:relative dark:bg-gray-800 hover:bg-gray-700" onClick={() => gameWin()}
                 >
                     Reset Game
                 </button>

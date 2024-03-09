@@ -1,18 +1,24 @@
 ---
+import TrophyIcon from "../components/icons/TrophyIcon.astro";
 import { GameM } from "../components/GameM";
 import Layout from "../layouts/Layout.astro";
-const cookie = Astro.request.headers.get('cookie')
+const cookie = Astro.request.headers.get("cookie");
 
-if(cookie === null){
-    return Astro.redirect('/minesweeper')
-} 
-
+if (cookie === null) {
+    return Astro.redirect("/minesweeper");
+}
 ---
 
 <Layout
     style="bg-slate-700 flex flex-wrap justify-center items-center h-[100vh]"
 >
-    <div class="w-[100%] h-[650px] flex justify-center items-center text-white">
+    <div
+        class="w-[100%] h-[650px] flex flex-col justify-center items-center text-white"
+    >
+        <div class="flex justify-center items-center gap-2 -mt-3 z-20">
+            
+            <a href="/minesweeper/scores"> <TrophyIcon class="text-yellow-400 h-8 w-8 hover:scale-125" /></a>
+        </div>
         <GameM client:only />
     </div>
 </Layout>

@@ -1,0 +1,13 @@
+---
+import ArrowLeftIcon from "./icons/ArrowLeftIcon.astro";
+const {href} = Astro.props
+
+---
+
+<div
+    class="absolute top-10 left-10 rounded-md flex items-center hover:bg-gray-800 justify-center border-white border-2"
+>
+    <a href={href} class="w-[50px] h-[50px] flex justify-center items-center">
+        <ArrowLeftIcon />
+    </a>
+</div>

@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import RegisterPage from "../components/RegisterPage";
-const isRegister = false;
+import ButtonNav from "../components/ButtonNav.astro"
+
 ---
 
 <Layout
     style="bg-[#1d1d1d] flex flex-col flex-wrap justify-center items-center h-[100vh]"
 >
-    {isRegister ? <p>enfnef</p> : <RegisterPage client:only/>}
+    <ButtonNav href="/minesweeper"/>
+    <RegisterPage client:only/>
 </Layout>

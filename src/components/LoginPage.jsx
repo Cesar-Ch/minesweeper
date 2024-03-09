@@ -61,8 +61,7 @@ const LoginPage = () => {
                 <button
                     type="submit"
                     className="text-black focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-zinc-100 hover:bg-zinc-200 focus:ring-zinc-300"
-                >Login</button
-                >
+                >Login</button>
                 
             </form>
         </>

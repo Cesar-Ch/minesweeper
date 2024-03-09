@@ -50,3 +50,9 @@ export const addWin = async (user, time: string, selectedValue: string) => {
 
     return result
 }
+
+export const getWinners = async (selectedValue: string) => {
+    const sql = `SELECT * FROM Scores WHERE level = ? ORDER BY time ASC LIMIT 10`
+    const result = await client.execute({ sql: sql, args: [selectedValue] });
+    return result
+}

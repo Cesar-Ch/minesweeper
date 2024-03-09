@@ -7,7 +7,6 @@ import { UserIcon } from './icons/UserIcon'
 import { resetGameStorage } from "../logics/storage";
 import { LogoutIcon } from './icons/Logout'
 
-
 export function GameM() {
   const [selectedValue, setSelectedValue] = useState(() => {
     const selectedValueFromStorage = window.localStorage.getItem('selectedValue')
@@ -26,6 +25,7 @@ export function GameM() {
     return '00:00:00'
   })
   const [start, setStart] = useState(false)
+  const [winner, setWinner] = useState(false)
 
   const startGame = () => {
     setStart(true)
@@ -82,6 +82,7 @@ export function GameM() {
 
   useEffect(() => {
     if (!start) return
+    if (winner) return
     const timer = setInterval(() => {
       let newSecond = Number(time.split(':')[2]) + 1
       let newMinute = Number(time.split(':')[1])
@@ -98,7 +99,7 @@ export function GameM() {
     }, 1000)
     return () => clearInterval(timer)
 
-  }, [time, start])
+  }, [time, start,winner])
   console.log(user)
 
   return (
@@ -132,7 +133,7 @@ export function GameM() {
       </div>
       {
         !start ? <div className="flex flex-wrap justify-center items-center  border-gray-600 border-4 rounded-md w-[90%] h-[90%] sm:w-[70%] md:w-[55%]  lg:w-[35%] text-center">
-        </div> : <Board selectedValue={selectedValue} setMarkedFlags={setMarkedFlags} markedFlags={markedFlags} user={user} time={time} />
+        </div> : <Board selectedValue={selectedValue} setMarkedFlags={setMarkedFlags} markedFlags={markedFlags} user={user} time={time} winner={winner} setWinner={setWinner} />
 
       }
 

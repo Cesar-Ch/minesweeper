@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ScoresPage from "../components/ScoresPage";
+import ButtonNav from "../components/ButtonNav.astro"
+const cookie = Astro.request.headers.get("cookie");
+
+if (cookie === null) {
+    return Astro.redirect("/minesweeper");
+}
+---
+
+<Layout
+    style="bg-slate-700 flex flex-wrap justify-center items-center h-[100vh]"
+>
+    <ButtonNav href="/minesweeper/game" />
+    <ScoresPage client:only/>
+</Layout>
+

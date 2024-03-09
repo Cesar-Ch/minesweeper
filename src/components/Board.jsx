@@ -11,7 +11,7 @@ import { saveGameToStorage } from '../logics/storage'
 import { BombIcon } from './icons/BombIcon'
 import { FlagIcon } from './icons/FlagIcon'
 
-export function Board({ selectedValue, setMarkedFlags, markedFlags, user, time }) {
+export function Board({ selectedValue, setMarkedFlags, markedFlags, user, time, winner, setWinner }) {
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem('board')
     if (boardFromStorage) return JSON.parse(boardFromStorage)
@@ -22,7 +22,6 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags, user, time }
     if (isDiscoveredFromStorage) return JSON.parse(isDiscoveredFromStorage)
     return []
   })
-  const [winner, setWinner] = useState(false)
   const [loser, setLoser] = useState(false)
   const [isFirstSelectionZero, setIsFirstSelectionZero] = useState(() => {
     const isFirstSelectionZeroFromStorage = window.localStorage.getItem('isFirstSelectionZero')
@@ -136,8 +135,8 @@ export function Board({ selectedValue, setMarkedFlags, markedFlags, user, time }
   }
 
   useEffect(() => {
-    saveGameToStorage(board, isDiscovered, isFirstSelectionZero, markedFlags, selectedValue)
-  }, [board, isDiscovered, isFirstSelectionZero, markedFlags, selectedValue])
+    saveGameToStorage(board, isDiscovered, isFirstSelectionZero, markedFlags, selectedValue, time)
+  }, [board, isDiscovered, isFirstSelectionZero, markedFlags, selectedValue,time])
 
 
   useEffect(() => {

@@ -5,14 +5,14 @@ import ButtonNav from "../components/ButtonNav.astro"
 const cookie = Astro.request.headers.get("cookie");
 
 if (cookie === null) {
-    return Astro.redirect("/minesweeper");
+    return Astro.redirect("/");
 }
 ---
 
 <Layout
     style="bg-slate-700 flex flex-wrap justify-center items-center h-[100vh]"
 >
-    <ButtonNav href="/minesweeper/game" />
+    <ButtonNav href="/game" />
     <ScoresPage client:only/>
 </Layout>
 

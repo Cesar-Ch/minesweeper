@@ -4,7 +4,7 @@ import LoginPage from "../components/LoginPage";
 const cookie = Astro.request.headers.get("cookie");
 
 if (cookie !== null) {
-	return Astro.redirect("/minesweeper/game");
+	return Astro.redirect("/game");
 }
 
 const {path} = Astro.params
@@ -18,7 +18,7 @@ console.log(path)
 	<div class="mt-5">
 		<h3 class="text-white">
 			Don't have an account <a
-				href="minesweeper/register"
+				href="/register"
 				class="text-blue-600">Signup now</a>
 		</h3>
 	</div>

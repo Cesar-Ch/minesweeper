@@ -11,7 +11,7 @@ const ScoresPage = () => {
     const getScores = async (level) => {
         try {
             const response = await fetch(
-                `/minesweeper/api/score?level=${level}`,
+                `/api/score?level=${level}`,
                 {
                     method: "GET",
                 },

@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 const cookie = Astro.request.headers.get("cookie");
 
 if (cookie === null) {
-    return Astro.redirect("/minesweeper");
+    return Astro.redirect("/");
 }
 ---
 
@@ -17,7 +17,7 @@ if (cookie === null) {
     >
         <div class="flex justify-center items-center gap-2 -mt-3 z-20">
             
-            <a href="/minesweeper/scores"> <TrophyIcon class="text-yellow-400 h-8 w-8 hover:scale-125" /></a>
+            <a href="/scores"> <TrophyIcon class="text-yellow-400 h-8 w-8 hover:scale-125" /></a>
         </div>
         <GameM client:only />
     </div>

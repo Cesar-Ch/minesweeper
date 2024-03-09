@@ -13,6 +13,7 @@
     "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/ts-plugin": "^1.5.3",
+    "@astrojs/vercel": "^7.3.5",
     "@libsql/client": "^0.5.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",

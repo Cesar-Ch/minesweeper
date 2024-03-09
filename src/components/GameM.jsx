@@ -45,7 +45,7 @@ export function GameM() {
 
   const getProfile = async () => {
     try {
-      const response = await fetch('/minesweeper/api/profile', {
+      const response = await fetch('/api/profile', {
         method: 'GET',
       }
       )
@@ -61,7 +61,7 @@ export function GameM() {
 
   const logout = async () => {
     try {
-      const response = await fetch('/minesweeper/api/logout', {
+      const response = await fetch('/api/logout', {
         method: 'POST',
       }
       )

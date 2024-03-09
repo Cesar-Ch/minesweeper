@@ -6,7 +6,7 @@ export function WinnerModal({user,time,selectedValue}) {
     const gameWin = async () => {
 
         try {
-            const response = await fetch('/minesweeper/api/winner', {
+            const response = await fetch('/api/winner', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

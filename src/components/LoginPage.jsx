@@ -18,7 +18,7 @@ const LoginPage = () => {
         e.preventDefault()
         console.log(credentials)
         try {
-            const response = await fetch('/minesweeper/api/auth/login', {
+            const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
